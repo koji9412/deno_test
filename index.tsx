@@ -1,28 +1,8 @@
-/**
- * Output: JSON Data
- */
- const json = fetch("https://api.github.com/users/denoland");
-
- json.then((response) => {
-   return response.json();
- }).then((jsonData) => {
-   console.log(jsonData);
- });
- 
- /**
-  * Output: HTML Data
-  */
- const text = fetch("https://deno.land/");
- 
- text.then((response) => {
-   return response.text();
- }).then((textData) => {
-   console.log(textData);
- });
- 
- /**
-  * Output: Error Message
-  */
- const error = fetch("https://does.not.exist/");
- 
- error.catch((error) => console.log(error.message));
+import { serve, Server, ServerRequest, Response } from "https://deno.land/std/http/server.ts"
+const server: Server = serve({ port: 8000 })
+for await (const req: ServerRequest of server) {
+  const res: Response = {
+    body: "<html><body>Hello World</body></html>\n"
+  }
+  req.respond(res)
+}
